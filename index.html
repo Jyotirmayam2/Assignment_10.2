@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Getters and Setters</title>
+</head>
+
+<body>
+    <script>
+        //js class
+        class Airplane {
+            constructor(name, occupancy, speed) {
+                this.Name = name;
+                this.Occupancy = occupancy;
+                this.Speed = speed;
+            }
+            
+            //setting 
+            set Name(value) {
+                if (value == undefined || value == '') {
+                    throw new Error("Name cannot be empty");
+                }
+                this.name = value;
+            }
+
+            get Name() {
+                return this.name;
+            }
+
+            set Occupancy(value) {
+                if (value == undefined || value == '') {
+                    throw new Error("Occupancy cannot be empty");
+                }
+
+                if (value < 0) {
+                    throw new Error("Occupancy cannot be negative");
+                }
+
+                if (this.occupancy + value > 180) {
+                    throw new Error("Occupancy cannot be more than 180");
+                }
+
+                this.occupancy = value;
+            }
+
+            get Occupancy() {
+                return this.occupancy;
+            }
+
+            set Speed(value) {
+                if (value == undefined || value == '') {
+                    throw new Error("Speed cannot be empty");
+                }
+
+                if (value < 0) {
+                    throw new Error("Speed cannot be negative");
+                }
+
+                if (this.speed + value >= 901) {
+                    throw new Error("Speed cannot be more than 900");
+                }
+                this.speed = value;
+            }
+
+            get Speed() {
+                return this.speed;
+            }
+
+            increaseSpeed(value) {
+                this.speed = this.speed + value;
+            }
+
+            decreaseSpeed(value) {
+                this.speed = this.speed - value;
+            }
+            status() {
+                console.log("Airplane : " + this.Name + " with " + this.Occupancy + " occupancy, is moving at " +
+                    this.Speed + " km/hr");
+            }
+        }
+        
+        console.log("Before Increasing speed");
+        var plane1 = new Airplane('Boeing 777', 180, 900);
+        plane1.status();
+        var plane2 = new Airplane('Boeing A380', 300, 600);
+        plane2.status();
+        var plane3 = new Airplane('Bombardier', 60, 700);
+        plane3.status();
+        
+        //uncomment the below to get the validation message for speed
+        //plane1.Speed = 10; 
+        console.log("After Increasing speed");
+        plane1.increaseSpeed(200);
+        plane1.status();
+        plane2.increaseSpeed(200);
+        plane2.status();
+        plane3.increaseSpeed(200);
+        plane3.status();
+    </script>
+</body>
+</html>
